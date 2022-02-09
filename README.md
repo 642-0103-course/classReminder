@@ -24,6 +24,7 @@
 # Deployment
 
 - The build will get automatically deployed once you update the code back to the github.
+- [Swagger URL](https://classremindergdp.herokuapp.com/swagger)
 
 # Testing
 
