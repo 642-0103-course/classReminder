@@ -45,5 +45,30 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
+   <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    // 👇 new code
+    @if (User.Identity.IsAuthenticated)
+    {
+    // 👆 new code
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-dark display-6" asp-area="" 
+             asp-controller="Catalog" 
+             asp-action="Index">Catalog</a>
+        </li>
+      </ul>
+    // 👇 new code
+    } else {
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-dark display-6" asp-area="" 
+             asp-controller="Account" 
+             asp-action="Login">Login</a>
+        </li>
+      </ul>
+      }
+      // 👆 new code
+  </div>
 </body>
 </html>
+  
