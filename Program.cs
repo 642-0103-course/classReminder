@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 using Auth0.AspNetCore.Authentication; // 👈 new code
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ using Microsoft.Extensions.Hosting;
 namespace Event_Management
 >>>>>>> c361744cd1734c1ff96d614ac68102f056614386
 =======
+=======
+>>>>>>> parent of c524215 (changes made for all the files)
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -34,6 +37,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace classReminder
+<<<<<<< HEAD
+>>>>>>> parent of c524215 (changes made for all the files)
+=======
 >>>>>>> parent of c524215 (changes made for all the files)
 {
     public class Program
