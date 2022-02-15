@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -92,40 +92,6 @@
     @*<script src="https://code.jquery.com/jquery-3.6.0.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-<<<<<<< HEAD
-    @RenderSection("Scripts", required: false)
-<<<<<<< HEAD
-<<<<<<< HEAD
-   <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-    // 👇 new code
-    @if (User.Identity.IsAuthenticated)
-    {
-    // 👆 new code
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-dark display-6" asp-area="" 
-             asp-controller="Catalog" 
-             asp-action="Index">Catalog</a>
-        </li>
-      </ul>
-    // 👇 new code
-    } else {
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-dark display-6" asp-area="" 
-             asp-controller="Account" 
-             asp-action="Login">Login</a>
-        </li>
-      </ul>
-      }
-      // 👆 new code
-  </div>
-=======
     @await RenderSectionAsync("Scripts", required: false)
->>>>>>> c361744cd1734c1ff96d614ac68102f056614386
-=======
->>>>>>> parent of c524215 (changes made for all the files)
-=======
->>>>>>> parent of c524215 (changes made for all the files)
 </body>
 </html>
