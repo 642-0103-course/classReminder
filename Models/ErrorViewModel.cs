@@ -1,6 +1,4 @@
-using System;
-
-namespace classReminder.Models
+namespace Event_Management.Models
 {
     public class ErrorViewModel
     {

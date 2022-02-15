@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using Auth0.AspNetCore.Authentication; // 👈 new code
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,12 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
+=======
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+
+namespace Event_Management
+>>>>>>> c361744cd1734c1ff96d614ac68102f056614386
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
