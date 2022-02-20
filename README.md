@@ -1,5 +1,7 @@
 # Class Remainder App
 
+[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
+
 - We are proposing the technology stack based on c# with Dot Net, and the front end with cshtml.
 - It is an fully optimized frame work which helps the company to maintaining and modifying with the latest requirements.
 - The technology stack is maintained by Microsoft which can assure that we can get support and updated moving forwarded.
