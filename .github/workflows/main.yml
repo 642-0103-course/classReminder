@@ -27,4 +27,15 @@ jobs:
 
       - name: InferSharp
         uses: microsoft/infersharpaction@v1.2.1
+      - name: Run Infer#      
+        uses: microsoft/infersharpaction@v1.2.1
+        id: runinfersharp
+        with:
+          binary-path: '<path to the binary directory containing .dlls and .pdbs>'
+
+      - name: Upload Infer# report as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+         name: report
+         path: infer-out/report.txt
 
