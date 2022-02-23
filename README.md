@@ -2,6 +2,8 @@
 
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d1fc3ced2e114e4d8e3e433b86d1c5af)](https://www.codacy.com/gh/giridhar196/classReminder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=giridhar196/classReminder&amp;utm_campaign=Badge_Grade)
+
 - We are proposing the technology stack based on c# with Dot Net, and the front end with cshtml.
 - It is an fully optimized frame work which helps the company to maintaining and modifying with the latest requirements.
 - The technology stack is maintained by Microsoft which can assure that we can get support and updated moving forwarded.
