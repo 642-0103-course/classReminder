@@ -102,6 +102,7 @@ html {
   position: absolute;
   bottom: 0;
   width: 100%;
+  height: fit-content;
   white-space: nowrap;
   
 }
