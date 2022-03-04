@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Event_Management.Controllers
@@ -28,11 +30,14 @@ namespace Event_Management.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
+            var name = User.Identity.Name;
+            //var x = ClaimsPrincipal.Current.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            var emailId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             List<EventModel> list = new List<EventModel>();
-            if (HttpContext.Session.GetString("UserId") != null)
+            if (emailId != null)
             {
                 var userId = HttpContext.Session.GetString("UserId");
-                list = _eventService.SearchList(userId);
+                list = _eventService.SearchList(emailId);
             }
             return View(list);
         }
@@ -45,7 +50,7 @@ namespace Event_Management.Controllers
         }
 
         [HttpPost]
-        [Route("Create/events")]
+        [Route("Create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(EventsCreateViewModel events)
         {
@@ -80,7 +85,7 @@ namespace Event_Management.Controllers
 
                     obj.EventName = events.EventName;
                     obj.Location = events.Location;
-                    obj.UserID = HttpContext.Session.GetString("UserId");
+                    obj.UserID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                     if (events.Recarsive == true)
                     {
                         List<string> list = new List<string>();
@@ -140,7 +145,7 @@ namespace Event_Management.Controllers
         }
 
         [HttpPut]
-        [Route("Edit/Id")]
+        [Route("Edit")]
         public IActionResult Edit(string Id)
         {
             var evd = _eventService.Get(Id);

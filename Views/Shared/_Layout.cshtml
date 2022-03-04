@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P7G4MDGFK6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7G4MDGFK6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-P7G4MDGFK6');
-</script>
+        gtag('config', 'G-P7G4MDGFK6');
+    </script>
 </head>
 <body>
     <header>
@@ -32,32 +32,40 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
+                    @{
+                        if (User?.Identity?.IsAuthenticated ?? false)
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Create">Add Event <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">View Events</a>
+                            </li>
+                        }
+                    }
                     <li class="nav-item active">
-                        <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Create">Add Event <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">View Events</a>
+                        <a class="nav-link" href="/swagger/index.html">Swagger</a>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
                     @{
                         if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            <u>Welcome: @User.Identity.Name</u>
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Profile">Hello @User.Identity.Name!</a>
+
                             <a class="nav-link text-dark" asp-controller="Account" asp-action="LogOut">LogOut</a>
                         }
 
                         else
                         {
-                            <a class="nav-link text-dark" asp-controller="User" asp-action="Create">Register</a>
-
-                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login/Register</a>
                         }
                     }
                 </div>
             </div>
         </nav>
     </header>
+    <partial name="_CookieConsentPartial" />
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

@@ -1,3 +1,4 @@
+using Auth0.AspNetCore.Authentication;
 using Event_Management.Models;
 using Event_Management.MongodbContext;
 using Event_Management.Services;
@@ -34,14 +35,23 @@ namespace Event_Management
             var mongoDbSetting = Configuration.GetSection(nameof(DatabaseSettings)).Get<DatabaseSettings>();
             services.AddIdentity<ApplicationUser, ApplicationRole>().AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(
                 mongoDbSetting.ConnectionString, mongoDbSetting.DatabaseName);
+            
+            services.ConfigureSameSiteNoneCookies();
 
+            services.AddAuth0WebAppAuthentication(options => {
+                options.Domain = Configuration["Auth0:Domain"];
+                options.ClientId = Configuration["Auth0:ClientId"];
+                options.Scope = "openid profile email";
+            });
+
+            services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
 
             services.AddSession();
 
             services.AddControllersWithViews();
 
-            services.AddSwaggerGen(x => { x.SwaggerDoc("v1", new OpenApiInfo { Title = "EventManagement API", Version = "v1" }); });
+            services.AddSwaggerGen(x => { x.SwaggerDoc("v1", new OpenApiInfo { Title = "Class Reminder Application API", Version = "v1" }); });
 
         }
 
@@ -57,6 +67,7 @@ namespace Event_Management
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseSwagger();
             app.UseSwaggerUI(x =>
             {

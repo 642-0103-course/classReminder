@@ -16,25 +16,25 @@
             <h6 class="m-0 font-weight-bold text-primary">Events</h6>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table-responsive-md table-responsive-sm table-responsive-lg">
                 <thead>
-                    <tr>
-                        <th>
+                    <tr class="col-md-12">
+                        <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.EventName)
                         </th>
-                        <th>
+                        <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.Location)
                         </th>
-                        <th>
+                        <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.Date)
                         </th>
-                        <th>
+                        <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.StartDate)
                         </th>
-                        <th>
+                        <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.EndDate)
                         </th>
-                        <th></th>
+                        <th class="col-md-2"> Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,25 +42,25 @@
                     {
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
+                            <tr class="col-md-12">
+                                <td class="col-md-2">
                                     @Html.DisplayFor(modelItem => item.EventName)
                                 </td>
-                                <td>
+                                <td class="col-md-2">
                                     @Html.DisplayFor(modelItem => item.Location)
                                 </td>
-                                <td>
+                                <td class="col-md-2">
                                     @if (item.Date != null)
                                     {@item.Date.Value.ToString("d")}
 
                                 </td>
-                                <td>
+                                <td class="col-md-2">
                                     @Html.DisplayFor(modelItem => item.StartDate)
                                 </td>
-                                <td>
+                                <td class="col-md-2">
                                     @Html.DisplayFor(modelItem => item.EndDate)
                                 </td>
-                                <td>
+                                <td class="col-md-2">
                                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                 </td>
