@@ -6,6 +6,10 @@
 
 
 ![Synk Integration](sync.png)
+
+Project Code Documentation [Link](https://giridhar196.github.io/ClassReminderDocument/api/index.html)
+Git hub Documentation Code [Link](https://github.com/giridhar196/ClassReminderDocument)
+
 - We are proposing the technology stack based on c# with Dot Net, and the front end with cshtml.
 - It is an fully optimized frame work which helps the company to maintaining and modifying with the latest requirements.
 - The technology stack is maintained by Microsoft which can assure that we can get support and updated moving forwarded.
