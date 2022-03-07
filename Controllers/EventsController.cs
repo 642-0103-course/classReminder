@@ -14,7 +14,6 @@ namespace Event_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
     public class EventsController : Controller
     {
 
@@ -43,7 +42,7 @@ namespace Event_Management.Controllers
         }
 
         [HttpGet]
-        [Route("Create")]
+       
         public IActionResult Create()
         {
             return View();
@@ -79,10 +78,6 @@ namespace Event_Management.Controllers
                     {
                         obj.ImageName = "";
                     }
-
-
-
-
                     obj.EventName = events.EventName;
                     obj.Location = events.Location;
                     obj.UserID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;

@@ -151,11 +151,11 @@
                     <div class="form-group">
                         @if (Model.ImageName != "")
                         {
-                            <img src=@("~/Image/"+Model.ImageName ) id="prv" asp-append-version="true" width="200px" height="200px" />
+                            <img src=@("~/Image/"+Model.ImageName ) alt="img" id="prv" asp-append-version="true" width="200px" height="200px" />
                         }
                         else
                         {
-                            <img src="~/Image/default.jpg" id="prv" asp-append-version="true" width="200px" height="200px" />
+                            <img src="~/Image/default.jpg" alt="default img" id="prv" asp-append-version="true" width="200px" height="200px" />
                         }
 
                     </div>

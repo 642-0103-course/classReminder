@@ -37,11 +37,11 @@
                     <div class="card col-sm-4 border-dark">
                         @if (i.ImageName != "")
                         {
-                            <img src="@("Image/"+i.ImageName)" class="card-img-top" width="250px" height="250px">
+                            <img alt="img" src="@("Image/"+i.ImageName)" class="card-img-top" width="250px" height="250px">
                         }
                         else
                         {
-                            <img src="Image/default.jpg" class="card-img-top" width="250px" height="250px">
+                            <img alt="default img" src="Image/default.jpg" class="card-img-top" width="250px" height="250px">
                         }
                         <div class="card-body">
                             <h5 class="card-title">@i.EventName</h5>
