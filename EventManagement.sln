@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement", "EventManagement.csproj", "{4E155F0B-728F-492B-A28B-21A568BB4F68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventManagement", "classReminder/EventManagement.csproj", "{4E155F0B-728F-492B-A28B-21A568BB4F68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
