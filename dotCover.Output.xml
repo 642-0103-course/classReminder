@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root CoveredStatements="14" TotalStatements="514" CoveragePercent="3" ReportType="Xml" DotCoverVersion="2021.3.3">
+  <Assembly Name="EventManagement" CoveredStatements="3" TotalStatements="502" CoveragePercent="1">
+    <Namespace Name="Event_Management" CoveredStatements="0" TotalStatements="59" CoveragePercent="0">
+      <Type Name="Program" CoveredStatements="0" TotalStatements="7" CoveragePercent="0">
+        <Method Name="CreateHostBuilder(string[]):IHostBuilder" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <AnonymousMethod Name="(IWebHostBuilder):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Method>
+        <Method Name="Main(string[]):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+      </Type>
+      <Type Name="Startup" CoveredStatements="0" TotalStatements="52" CoveragePercent="0">
+        <Constructor Name="Startup(IConfiguration)" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <AutoProperty Name="Configuration:IConfiguration" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <Method Name="Configure(IApplicationBuilder,IWebHostEnvironment):void" CoveredStatements="0" TotalStatements="24" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="18" CoveragePercent="0" />
+          <AnonymousMethod Name="(SwaggerUIOptions):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <AnonymousMethod Name="(IEndpointRouteBuilder):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Method>
+        <Method Name="ConfigureServices(IServiceCollection):void" CoveredStatements="0" TotalStatements="23" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="14" CoveragePercent="0" />
+          <AnonymousMethod Name="(IServiceProvider):IDatabaseSettings" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <AnonymousMethod Name="(SwaggerGenOptions):void" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <AnonymousMethod Name="(Auth0WebAppOptions):void" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+        </Method>
+      </Type>
+    </Namespace>
+    <Namespace Name="Event_Management.Controllers" CoveredStatements="0" TotalStatements="338" CoveragePercent="0">
+      <Type Name="AccountController" CoveredStatements="0" TotalStatements="20" CoveragePercent="0">
+        <Method Name="AccessDenied():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Claims():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Login(string):Task" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        </Method>
+        <Method Name="Logout():Task" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+        </Method>
+        <Method Name="Profile():IActionResult" CoveredStatements="0" TotalStatements="5" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+          <AnonymousMethod Name="(Claim):bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <AnonymousMethod Name="(Claim):bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </Method>
+      </Type>
+      <Type Name="EventsController" CoveredStatements="0" TotalStatements="246" CoveragePercent="0">
+        <Constructor Name="EventsController(EventService,IWebHostEnvironment)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+        <Method Name="Create():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Create(EventsCreateViewModel):Task&lt;IActionResult&gt;" CoveredStatements="0" TotalStatements="77" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="77" CoveragePercent="0">
+            <OwnCoverage CoveredStatements="0" TotalStatements="76" CoveragePercent="0" />
+            <AnonymousMethod Name="(Claim):bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          </InternalCompiledMethod>
+        </Method>
+        <Method Name="Delete(string):IActionResult" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="DeleteConfirm(string):IActionResult" CoveredStatements="0" TotalStatements="14" CoveragePercent="0" />
+        <Method Name="Edit(string):IActionResult" CoveredStatements="0" TotalStatements="45" CoveragePercent="0" />
+        <Method Name="Edit(EventsCreateViewModel):Task&lt;IActionResult&gt;" CoveredStatements="0" TotalStatements="86" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="86" CoveragePercent="0" />
+        </Method>
+        <Method Name="Index():IActionResult" CoveredStatements="0" TotalStatements="12" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="11" CoveragePercent="0" />
+          <AnonymousMethod Name="(Claim):bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </Method>
+      </Type>
+      <Type Name="HomeController" CoveredStatements="0" TotalStatements="20" CoveragePercent="0">
+        <Constructor Name="HomeController(ILogger&lt;HomeController&gt;,EventService)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+        <Property Name="arrival:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        </Property>
+        <Method Name="Error():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Index():IActionResult" CoveredStatements="0" TotalStatements="9" CoveragePercent="0" />
+      </Type>
+      <Type Name="UserController" CoveredStatements="0" TotalStatements="52" CoveragePercent="0">
+        <Constructor Name="UserController(UserManager&lt;ApplicationUser&gt;,RoleManager&lt;ApplicationRole&gt;)" CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+        <Method Name="Create():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Create(User):Task&lt;IActionResult&gt;" CoveredStatements="0" TotalStatements="21" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="21" CoveragePercent="0" />
+        </Method>
+        <Method Name="CreateRole():IActionResult" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="CreateRole(UserRole):Task&lt;IActionResult&gt;" CoveredStatements="0" TotalStatements="20" CoveragePercent="0">
+          <InternalCompiledMethod Name="MoveNext():void" CoveredStatements="0" TotalStatements="20" CoveragePercent="0" />
+        </Method>
+      </Type>
+    </Namespace>
+    <Namespace Name="Event_Management.Models" CoveredStatements="3" TotalStatements="59" CoveragePercent="5">
+      <Type Name="ErrorViewModel" CoveredStatements="0" TotalStatements="3" CoveragePercent="0">
+        <AutoProperty Name="RequestId:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <Property Name="ShowRequestId:bool" CoveredStatements="0" TotalStatements="1" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </Property>
+      </Type>
+      <Type Name="EventModel" CoveredStatements="0" TotalStatements="20" CoveragePercent="0">
+        <AutoProperty Name="Date:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Days:string[]" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="EndDate:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="EventName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Id:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="ImageName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="IsRecarsive:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Location:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="StartDate:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="UserID:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+      </Type>
+      <Type Name="EventsCreateViewModel" CoveredStatements="0" TotalStatements="28" CoveragePercent="0">
+        <AutoProperty Name="Date:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="EndDate:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="EventName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="F:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Id:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="ImageFile:IFormFile" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="ImageName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Location:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="M:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Recarsive:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="StartDate:Nullable&lt;DateTime&gt;" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="T:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="TH:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="W:bool" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+      </Type>
+      <Type Name="User" CoveredStatements="3" TotalStatements="6" CoveragePercent="50">
+        <AutoProperty Name="Email:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <AutoProperty Name="Name:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+        <AutoProperty Name="Password:string" CoveredStatements="1" TotalStatements="2" CoveragePercent="50">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="1" TotalStatements="1" CoveragePercent="100" />
+        </AutoProperty>
+      </Type>
+      <Type Name="UserRole" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+        <AutoProperty Name="RoleName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+      </Type>
+    </Namespace>
+    <Namespace Name="Event_Management.MongodbContext" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+      <Type Name="DatabaseSettings" CoveredStatements="0" TotalStatements="4" CoveragePercent="0">
+        <AutoProperty Name="ConnectionString:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="DatabaseName:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+      </Type>
+    </Namespace>
+    <Namespace Name="Event_Management.Services" CoveredStatements="0" TotalStatements="36" CoveragePercent="0">
+      <Type Name="EventService" CoveredStatements="0" TotalStatements="19" CoveragePercent="0">
+        <Constructor Name="EventService(IDatabaseSettings)" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" />
+        <Method Name="Create(EventModel):EventModel" CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+        <Method Name="Get():List&lt;EventModel&gt;" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        <Method Name="Get(string):EventModel" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        <Method Name="Remove(EventModel):void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        <Method Name="Remove(string):void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        <Method Name="Search(string):List&lt;EventModel&gt;" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        <Method Name="SearchList(string):List&lt;EventModel&gt;" CoveredStatements="0" TotalStatements="3" CoveragePercent="0" />
+        <Method Name="Update(string,EventModel):void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+      </Type>
+      <Type Name="SameSiteServiceCollectionExtensions" CoveredStatements="0" TotalStatements="17" CoveragePercent="0">
+        <Method Name="CheckSameSite(CookieOptions):void" CoveredStatements="0" TotalStatements="6" CoveragePercent="0" />
+        <Method Name="ConfigureSameSiteNoneCookies(IServiceCollection):IServiceCollection" CoveredStatements="0" TotalStatements="11" CoveragePercent="0">
+          <OwnCoverage CoveredStatements="0" TotalStatements="4" CoveragePercent="0" />
+          <AnonymousMethod Name="(CookiePolicyOptions):void" CoveredStatements="0" TotalStatements="7" CoveragePercent="0">
+            <OwnCoverage CoveredStatements="0" TotalStatements="5" CoveragePercent="0" />
+            <AnonymousMethod Name="(AppendCookieContext):void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+            <AnonymousMethod Name="(DeleteCookieContext):void" CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          </AnonymousMethod>
+        </Method>
+      </Type>
+    </Namespace>
+    <Namespace Name="SampleMvcApp.ViewModels" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+      <Type Name="UserProfileViewModel" CoveredStatements="0" TotalStatements="6" CoveragePercent="0">
+        <AutoProperty Name="EmailAddress:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="Name:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+        <AutoProperty Name="ProfileImage:string" CoveredStatements="0" TotalStatements="2" CoveragePercent="0">
+          <PropertyGetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+          <PropertySetter CoveredStatements="0" TotalStatements="1" CoveragePercent="0" />
+        </AutoProperty>
+      </Type>
+    </Namespace>
+  </Assembly>
+  <Assembly Name="EventManagement.Test" CoveredStatements="11" TotalStatements="12" CoveragePercent="92">
+    <Namespace Name="EventManagement.Test" CoveredStatements="11" TotalStatements="12" CoveragePercent="92">
+      <Type Name="TestController" CoveredStatements="7" TotalStatements="7" CoveragePercent="100">
+        <Method Name="GetReturnsProduct():void" CoveredStatements="7" TotalStatements="7" CoveragePercent="100" />
+      </Type>
+      <Type Name="Tests" CoveredStatements="4" TotalStatements="5" CoveragePercent="80">
+        <Method Name="Setup():void" CoveredStatements="2" TotalStatements="2" CoveragePercent="100" />
+        <Method Name="Test1():void" CoveredStatements="2" TotalStatements="3" CoveragePercent="67" />
+      </Type>
+    </Namespace>
+  </Assembly>
+</Root>
