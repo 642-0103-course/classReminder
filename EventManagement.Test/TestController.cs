@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Event_Management.Models;
 using NUnit.Framework;
 
-namespace Event_Management.Controllers
+namespace EventManagement.Test
 {
     [TestFixture]
     public class TestController

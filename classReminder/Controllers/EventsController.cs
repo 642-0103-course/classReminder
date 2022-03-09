@@ -144,7 +144,7 @@ namespace Event_Management.Controllers
             return RedirectToAction("Index", "Events");
         }
 
-        [HttpPut]
+        [HttpGet]
         [Route("Edit")]
         public IActionResult Edit(string Id)
         {
@@ -195,7 +195,7 @@ namespace Event_Management.Controllers
         }
 
         [HttpPost]
-        [Route("Edit/events")]
+        [Route("Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EventsCreateViewModel events)
         {
@@ -295,7 +295,7 @@ namespace Event_Management.Controllers
             return RedirectToAction("Index", "Events");
         }
 
-        [HttpDelete]
+        [HttpGet]
         [Route("Delete/id")]
         public IActionResult Delete(string id)
         {
