@@ -11,7 +11,10 @@
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
-
+	<PropertyGroup>
+		<!-- Exclude the project from analysis -->
+		<SonarQubeExclude>false</SonarQubeExclude>
+	</PropertyGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.Identity.MongoDbCore" Version="3.1.2" />
     <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.0.1" />
