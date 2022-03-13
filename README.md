@@ -1,12 +1,5 @@
 # Class Remainder App
 
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=giridhar196_classReminder&metric=bugs)](https://sonarcloud.io/summary/new_code?id=giridhar196_classReminder)
-
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d1fc3ced2e114e4d8e3e433b86d1c5af)](https://www.codacy.com/gh/giridhar196/classReminder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=giridhar196/classReminder&amp;utm_campaign=Badge_Grade)
 
 
