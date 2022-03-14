@@ -9,54 +9,58 @@
         float: none; /* Added */
         margin-bottom: 220px; /* Added */
     }
+
+    .footer {
+        position: inherit !important;
+    }
 </style>
 @{
     <div class="pt-5 ">
-        <div class="card" style="width: 23rem;" role="main" id="bearcat_alert">
-            <img class="card-img-top" src="~/FASFA-Homepage-Graphic-22-23-01.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">P&F Class.</h5>
-                <p class="card-text">Some information about the class is displayed here.</p>
+        @if (User.Identity.IsAuthenticated != true)
+        {
+            <div class="card" style="width: 23rem;" role="main" id="bearcat_alert">
+                <img class="card-img-top" src="~/FASFA-Homepage-Graphic-22-23-01.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">P&F Class.</h5>
+                    <p class="card-text">Some information about the class is displayed here.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-primary">Location: <span>Colden hall</span></li>
+                    <li class="list-group-item bg-primary">Date: <span> @DateTime.Today</span></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/api/Events/Index" class="card-link">See more</a>
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item bg-primary">Location: <span>Colden hall</span></li>
-                <li class="list-group-item bg-primary">Date: <span> @DateTime.Today</span></li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">See more</a>
-            </div>
-        </div>
+        }
     </div>
     if (User.Identity.IsAuthenticated != false)
     {
         if (Model != null)
         {
-            <div class="card-deck">
-                @foreach (var i in Model)
-                {
-                    <div class="card col-sm-4 border-dark">
-                        @if (i.ImageName != "")
-                        {
-                            <img alt="img" src="@("Image/"+i.ImageName)" class="card-img-top" width="250px" height="250px">
-                        }
-                        else
-                        {
-                            <img alt="default img" src="Image/default.jpg" class="card-img-top" width="250px" height="250px">
-                        }
-                        <div class="card-body">
-                            <h5 class="card-title">@i.EventName</h5>
-                            <p class="card-text">@i.Location</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="Events/Edit/@i.Id" class="btn btn-primary btn-block">Edit</a>
-                        </div>
-                    </div>
-                }
-            </div>
 
+            <div class="card" style="width: 23rem;" role="main" id="bearcat_alert">
+                @if (Model.FirstOrDefault().ImageName != "")
+                {
+                    <img class="card-img-top" src="@("Image/"+Model.FirstOrDefault().ImageName)" alt="Card image cap">
+                }
+                else
+                {
+                    <img class="card-img-top" src="Image/default.jpg" alt="default img">
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@Model.FirstOrDefault().EventName</h5>
+                    <p class="card-text">Some information about the class is displayed here.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-primary">Location: <span>@Model.FirstOrDefault().Location</span></li>
+                    <li class="list-group-item bg-primary">Date: <span> @Model.FirstOrDefault().Date.</span></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/api/Events/Index" class="card-link">See more</a>
+                </div>
+            </div>
         }
 
     }
-
-
 }

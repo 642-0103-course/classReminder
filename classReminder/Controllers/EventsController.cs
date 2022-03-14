@@ -52,7 +52,7 @@ namespace Event_Management.Controllers
         [HttpPost]
         [Route("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(EventsCreateViewModel events)
+        public async Task<IActionResult> Create([FromForm] EventsCreateViewModel events)
         {
             if (ModelState.IsValid)
             {
@@ -197,7 +197,7 @@ namespace Event_Management.Controllers
         [HttpPost]
         [Route("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EventsCreateViewModel events)
+        public async Task<IActionResult> Edit([FromForm] EventsCreateViewModel events)
         {
             if (ModelState.IsValid)
             {
@@ -296,7 +296,7 @@ namespace Event_Management.Controllers
         }
 
         [HttpGet]
-        [Route("Delete/id")]
+        [Route("Delete")]
         public IActionResult Delete(string id)
         {
             var item = _eventService.Get(id);
@@ -305,25 +305,28 @@ namespace Event_Management.Controllers
         }
 
         [HttpPost]
-        [Route("DeleteConfirm/id")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirm(string id)
+        [Route("Delete/id")]
+        public IActionResult DeleteConfirm([FromForm] string id)
         {
-            string wwwRootPath = _hostEnviroment.WebRootPath;
-
-            var ev = _eventService.Get(id);
-
-            if (ev.ImageName != null && ev.ImageName != "default")
+            if (id != null)
             {
-                var oldImg = Path.Combine(wwwRootPath, "Image", ev.ImageName);
-                if (System.IO.File.Exists(oldImg))
+                string wwwRootPath = _hostEnviroment.WebRootPath;
+
+                var ev = _eventService.Get(id);
+
+                if (ev.ImageName != null && ev.ImageName != "default")
                 {
-                    System.IO.File.Delete(oldImg);
+                    var oldImg = Path.Combine(wwwRootPath, "Image", ev.ImageName);
+                    if (System.IO.File.Exists(oldImg))
+                    {
+                        System.IO.File.Delete(oldImg);
+                    }
                 }
+
+                _eventService.Remove(id);
             }
-
-            _eventService.Remove(id);
-
+           
             return RedirectToAction("Index", "Events");
         }
 

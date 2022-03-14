@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Security.Claims;
 
 namespace Event_Management.Controllers
 {
@@ -24,10 +26,10 @@ namespace Event_Management.Controllers
         {
 
             List<EventModel> list = new List<EventModel>();
-            if (HttpContext.Session.GetString("UserId") != null)
+            var emailId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            if (emailId != null)
             {
-                var userId = HttpContext.Session.GetString("UserId");
-                list = _eventService.SearchList(userId);
+                list = _eventService.SearchList(emailId);
             }
             return View(list);
         }
