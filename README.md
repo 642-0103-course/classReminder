@@ -41,6 +41,8 @@ Git hub Documentation Code [Link](https://github.com/giridhar196/ClassReminderDo
 - Under actions you can find the automated test yaml running and updated. 
 - [Sonar Test Report](https://sonarcloud.io/project/overview?id=giridhar196_classReminder)
 - [Action Link](https://github.com/giridhar196/classReminder/actions/workflows/sonar.yml)
+- To test the coverage we need to run the command
+- dotnet dotcover test --dcReportType=HTML
 
 # Useful Links.
 
