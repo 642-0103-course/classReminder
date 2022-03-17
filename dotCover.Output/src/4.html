@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\girid\OneDrive\Desktop\Desk\GDP\classReminder\classReminder\Startup.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Auth0.AspNetCore.Authentication;
+using Event_Management.Models;
+using Event_Management.MongodbContext;
+using Event_Management.Services;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using System;
+
+namespace Event_Management
+{
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.Configure&lt;DatabaseSettings&gt;(
+           Configuration.GetSection(nameof(DatabaseSettings)));
+
+            services.AddSingleton&lt;IDatabaseSettings&gt;(sp =&gt;
+             sp.GetRequiredService&lt;IOptions&lt;DatabaseSettings&gt;&gt;().Value);
+            services.AddSingleton&lt;EventService&gt;();
+
+            var mongoDbSetting = Configuration.GetSection(nameof(DatabaseSettings)).Get&lt;DatabaseSettings&gt;();
+            services.AddIdentity&lt;ApplicationUser, ApplicationRole&gt;().AddMongoDbStores&lt;ApplicationUser, ApplicationRole, Guid&gt;(
+                mongoDbSetting.ConnectionString, mongoDbSetting.DatabaseName);
+            
+            services.ConfigureSameSiteNoneCookies();
+
+            services.AddAuth0WebAppAuthentication(options =&gt; {
+                options.Domain = Configuration[&quot;Auth0:Domain&quot;];
+                options.ClientId = Configuration[&quot;Auth0:ClientId&quot;];
+                options.Scope = &quot;openid profile email&quot;;
+            });
+
+            services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+
+            services.AddSession();
+
+            services.AddControllersWithViews();
+
+            services.AddSwaggerGen(x =&gt; { x.SwaggerDoc(&quot;v1&quot;, new OpenApiInfo { Title = &quot;Class Reminder Application API&quot;, Version = &quot;v1&quot; }); });
+
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler(&quot;/Home/Error&quot;);
+            }
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseSwagger();
+            app.UseSwaggerUI(x =&gt;
+            {
+                x.SwaggerEndpoint(&quot;/swagger/v1/swagger.json&quot;, &quot;My API V1&quot;);
+            });
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseSession();
+            app.UseEndpoints(endpoints =&gt;
+            {
+                endpoints.MapControllerRoute(
+                    name: &quot;default&quot;,
+                    pattern: &quot;{controller=Home}/{action=Index}/{id?}&quot;);
+            });
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,9,18,53,0],[19,9,19,10,0],[20,13,20,43,0],[21,9,21,10,0],[23,47,23,51,0],[27,9,27,10,0],[28,13,29,64,0],[31,13,32,14,0],[32,14,32,71,0],[32,71,32,73,0],[33,13,33,51,0],[35,13,35,109,0],[36,13,37,79,0],[39,13,39,53,0],[41,13,41,62,0],[41,62,41,63,0],[41,63,42,17,0],[42,17,42,64,0],[42,64,43,17,0],[43,17,43,68,0],[43,68,44,17,0],[44,17,44,56,0],[44,56,45,13,0],[45,13,45,14,0],[45,14,45,16,0],[47,13,47,48,0],[48,13,48,50,0],[50,13,50,35,0],[52,13,52,48,0],[54,13,54,41,0],[54,41,54,42,0],[54,42,54,43,0],[54,43,54,140,0],[54,140,54,141,0],[54,141,54,142,0],[54,142,54,144,0],[56,9,56,10,0],[60,9,60,10,0],[61,13,61,37,0],[62,13,62,14,0],[63,17,63,49,0],[64,13,64,14,0],[66,13,66,14,0],[67,17,67,56,0],[68,13,68,14,0],[69,13,69,34,0],[70,13,70,35,0],[71,13,71,30,0],[72,13,73,13,0],[73,13,73,14,0],[73,14,74,17,0],[74,17,74,76,0],[74,76,75,13,0],[75,13,75,14,0],[75,14,75,16,0],[76,13,76,30,0],[77,13,77,37,0],[78,13,78,36,0],[79,13,79,30,0],[80,13,81,13,0],[81,13,81,14,0],[81,14,82,17,0],[82,17,84,72,0],[84,72,85,13,0],[85,13,85,14,0],[85,14,85,16,0],[86,9,86,10,0]]);
+    </script>
+  </body>
+</html>

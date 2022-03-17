@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\girid\OneDrive\Desktop\Desk\GDP\classReminder\classReminder\Controllers\HomeController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Event_Management.Models;
+using Event_Management.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Security.Claims;
+
+namespace Event_Management.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger&lt;HomeController&gt; _logger;
+        private readonly EventService _eventService;
+        public DateTime? arrival { get { return DateTime.Now; } }
+        public HomeController(ILogger&lt;HomeController&gt; logger, EventService eventService)
+        {
+            _logger = logger;
+            _eventService = eventService;
+        }
+
+        public IActionResult Index()
+        {
+
+            List&lt;EventModel&gt; list = new List&lt;EventModel&gt;();
+            var emailId = User.Claims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.Email)?.Value;
+            if (emailId != null)
+            {
+                list = _eventService.SearchList(emailId);
+            }
+            return View(list);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,40,18,41,0],[18,42,18,62,0],[18,63,18,64,0],[19,9,19,89,0],[20,9,20,10,0],[21,13,21,30,0],[22,13,22,42,0],[23,9,23,10,0],[26,9,26,10,0],[28,13,28,60,0],[29,13,29,59,0],[29,59,29,85,0],[29,85,29,94,0],[30,13,30,33,0],[31,13,31,14,0],[32,17,32,58,0],[33,13,33,14,0],[34,13,34,31,0],[35,9,35,10,0],[39,9,39,10,0],[40,13,40,113,0],[41,9,41,10,0]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\girid\OneDrive\Desktop\Desk\GDP\classReminder\classReminder\Services\EventService.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Event_Management.Models;
+using Event_Management.MongodbContext;
+using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Event_Management.Services
+{
+    public class EventService
+    {
+        private readonly IMongoCollection&lt;EventModel&gt; _event;
+        public EventService(IDatabaseSettings settings)
+        {
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+
+            _event = database.GetCollection&lt;EventModel&gt;(&quot;Events&quot;);
+        }
+
+        public List&lt;EventModel&gt; Get() =&gt;
+            _event.Find(e =&gt; true).ToList();
+
+        public EventModel Get(string id) =&gt;
+            _event.Find&lt;EventModel&gt;(e =&gt; e.Id == id).FirstOrDefault();
+
+        public EventModel Create(EventModel eventModel)
+        {
+            _event.InsertOne(eventModel);
+            return eventModel;
+        }
+
+        public void Update(string id, EventModel eventModel) =&gt;
+            _event.ReplaceOne(e =&gt; e.Id == id, eventModel);
+
+        public void Remove(EventModel eventModel) =&gt;
+            _event.DeleteOne(e =&gt; e.Id == eventModel.Id);
+
+        public void Remove(string id) =&gt;
+            _event.DeleteOne(e =&gt; e.Id == id);
+
+        public List&lt;EventModel&gt; Search(string eventName) =&gt;
+           _event.Find&lt;EventModel&gt;(e =&gt; e.EventName.Contains(eventName)).ToList();
+
+        public List&lt;EventModel&gt; SearchList(string userId)
+        {
+            return _event.Find&lt;EventModel&gt;(e =&gt; e.UserID == userId).ToList();
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[12,9,12,56,1],[13,9,13,10,1],[14,13,14,69,1],[15,13,15,70,1],[17,13,17,67,1],[18,9,18,10,1],[21,13,21,44,1],[24,13,24,70,1],[27,9,27,10,0],[28,13,28,42,0],[29,13,29,31,0],[30,9,30,10,0],[33,13,33,59,0],[36,13,36,57,0],[39,13,39,46,0],[42,12,42,82,0],[45,9,45,10,1],[46,13,46,78,1],[47,9,47,10,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\girid\OneDrive\Desktop\Desk\GDP\classReminder\classReminder\Controllers\EventsController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Event_Management.Models;
+using Event_Management.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+namespace Event_Management.Controllers
+{
+    [Route(&quot;api/[controller]&quot;)]
+    [ApiController]
+    
+    public class EventsController : Controller
+    {
+
+        private readonly EventService _eventService;
+        private readonly IWebHostEnvironment _hostEnviroment;
+        public EventsController(EventService eventService, IWebHostEnvironment hostEnviroment)
+        {
+            _eventService = eventService;
+            _hostEnviroment = hostEnviroment;
+        }
+
+        [HttpGet]
+        [Route(&quot;Index&quot;)]
+        public IActionResult Index()
+        {
+            var name = User.Identity.Name;
+            //var x = ClaimsPrincipal.Current.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            var emailId = User.Claims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.Email)?.Value;
+            List&lt;EventModel&gt; list = new List&lt;EventModel&gt;();
+            if (emailId != null)
+            {
+                var userId = HttpContext.Session.GetString(&quot;UserId&quot;);
+                list = _eventService.SearchList(emailId);
+            }
+            return View(list);
+        }
+
+        [HttpGet]
+        [Route(&quot;Create&quot;)]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route(&quot;Create&quot;)]
+        [ValidateAntiForgeryToken]
+        public async Task&lt;IActionResult&gt; Create([FromForm] EventsCreateViewModel events)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var obj = new EventModel();
+                    string wwwRootPath = _hostEnviroment.WebRootPath;
+                    string[] days = { };
+
+                    if (events.ImageFile != null)
+                    {
+                        string imgFileName = Path.GetFileNameWithoutExtension(events.ImageFile.FileName);
+                        string extension = Path.GetExtension(events.ImageFile.FileName);
+                        imgFileName = imgFileName + DateTime.Now.ToString(&quot;yyMMssfff&quot;) + extension;
+                        string path = Path.Combine(wwwRootPath, &quot;Image&quot;, imgFileName);
+
+                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        {
+                            await events.ImageFile.CopyToAsync(fileStream);
+                        }
+                        obj.ImageName = imgFileName;
+                    }
+                    else
+                    {
+                        obj.ImageName = &quot;&quot;;
+                    }
+
+
+
+
+                    obj.EventName = events.EventName;
+                    obj.Location = events.Location;
+                    obj.UserID = User.Claims.FirstOrDefault(c =&gt; c.Type == ClaimTypes.Email)?.Value;
+                    if (events.Recarsive == true)
+                    {
+                        List&lt;string&gt; list = new List&lt;string&gt;();
+                        if (events.M)
+                        {
+                            list.Add(DayOfWeek.Monday.ToString());
+                        }
+                        if (events.T)
+                        {
+                            list.Add(DayOfWeek.Tuesday.ToString());
+                        }
+                        if (events.W)
+                        {
+                            list.Add(DayOfWeek.Wednesday.ToString());
+                        }
+                        if (events.TH)
+                        {
+                            list.Add(DayOfWeek.Thursday.ToString());
+                        }
+                        if (events.F)
+                        {
+                            list.Add(DayOfWeek.Friday.ToString());
+                        }
+                        if (list.Count &gt; 0)
+                        {
+                            obj.Days = list.ToArray();
+                        }
+                        else
+                        {
+                            obj.Days = days;
+                        }
+                        obj.StartDate = events.StartDate;
+                        obj.EndDate = events.EndDate;
+                        obj.IsRecarsive = true;
+                        obj.Date = null;
+                    }
+                    else
+                    {
+                        obj.IsRecarsive = false;
+                        obj.Date = events.Date;
+                        obj.StartDate = null;
+                        obj.EndDate = null;
+                    }
+
+                    _eventService.Create(obj);
+                    ViewBag.Message = &quot;Event Created Successfully&quot;;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = &quot;Error.! &quot; + ex.Message;
+                }
+
+
+            }
+
+            return RedirectToAction(&quot;Index&quot;, &quot;Events&quot;);
+        }
+
+        [HttpGet]
+        [Route(&quot;Edit&quot;)]
+        public IActionResult Edit(string Id)
+        {
+            var evd = _eventService.Get(Id);
+            var ev = new EventsCreateViewModel();
+
+            if (evd != null)
+            {
+                ev.Id = evd.Id;
+                ev.EventName = evd.EventName;
+                ev.Location = evd.Location;
+                ev.Date = evd.Date;
+                ev.StartDate = evd.StartDate;
+                ev.EndDate = evd.EndDate;
+                ev.ImageName = evd.ImageName;
+                if (evd.IsRecarsive == true)
+                {
+                    ev.Recarsive = true;
+
+                    foreach (var i in evd.Days)
+                    {
+                        if (i == DayOfWeek.Monday.ToString())
+                        {
+                            ev.M = true;
+                        }
+                        else if (i == DayOfWeek.Tuesday.ToString())
+                        {
+                            ev.T = true;
+                        }
+                        else if (i == DayOfWeek.Wednesday.ToString())
+                        {
+                            ev.W = true;
+                        }
+                        else if (i == DayOfWeek.Thursday.ToString())
+                        {
+                            ev.TH = true;
+                        }
+                        else if (i == DayOfWeek.Friday.ToString())
+                        {
+                            ev.F = true;
+                        }
+                    }
+                }
+
+            }
+
+            return View(ev);
+        }
+
+        [HttpPost]
+        [Route(&quot;Edit&quot;)]
+        [ValidateAntiForgeryToken]
+        public async Task&lt;IActionResult&gt; Edit([FromForm] EventsCreateViewModel events)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (events != null)
+                    {
+                        string wwwRootPath = _hostEnviroment.WebRootPath;
+                        string[] days = Array.Empty&lt;string&gt;();
+
+                        var ev = _eventService.Get(events.Id);
+
+                        if (ev.ImageName != null &amp;&amp; ev.ImageName != &quot;default&quot;)
+                        {
+                            var oldImg = Path.Combine(wwwRootPath, &quot;Image&quot;, ev.ImageName);
+                            if (System.IO.File.Exists(oldImg))
+                            {
+                                System.IO.File.Delete(oldImg);
+                            }
+                        }
+
+                        if (events.ImageFile != null)
+                        {
+                            string imgFileName = Path.GetFileNameWithoutExtension(events.ImageFile.FileName);
+                            string extension = Path.GetExtension(events.ImageFile.FileName);
+                            imgFileName = imgFileName + DateTime.Now.ToString(&quot;yyMMssfff&quot;) + extension;
+                            string path = Path.Combine(wwwRootPath, &quot;Image&quot;, imgFileName);
+
+                            using (var fileStream = new FileStream(path, FileMode.Create))
+                            {
+                                await events.ImageFile.CopyToAsync(fileStream);
+                            }
+                            ev.ImageName = imgFileName;
+                        }
+                        else
+                        {
+                            ev.ImageName = &quot;&quot;;
+                        }
+
+
+                        ev.EventName = events.EventName;
+                        ev.Location = events.Location;
+                        if (events.Recarsive == true)
+                        {
+                            List&lt;string&gt; list = new List&lt;string&gt;();
+                            if (events.M == true)
+                            {
+                                list.Add(DayOfWeek.Monday.ToString());
+                            }
+                            if (events.T)
+                            {
+                                list.Add(DayOfWeek.Tuesday.ToString());
+                            }
+                            if (events.W)
+                            {
+                                list.Add(DayOfWeek.Wednesday.ToString());
+                            }
+                            if (events.TH)
+                            {
+                                list.Add(DayOfWeek.Thursday.ToString());
+                            }
+                            if (events.F)
+                            {
+                                list.Add(DayOfWeek.Friday.ToString());
+                            }
+                            if (list.Count &gt; 0)
+                            {
+                                ev.Days = list.ToArray();
+                            }
+                            else
+                            {
+                                ev.Days = days;
+                            }
+                            ev.StartDate = events.StartDate;
+                            ev.EndDate = events.EndDate;
+                            ev.IsRecarsive = true;
+                            ev.Date = null;
+                        }
+                        else
+                        {
+                            ev.IsRecarsive = false;
+                            ev.Date = events.Date;
+                            ev.StartDate = null;
+                            ev.EndDate = null;
+                        }
+                        _eventService.Update(events.Id, ev);
+                        ViewBag.Message = &quot;Event Successfully Updated.!&quot;;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = &quot;Error.! &quot; + ex.Message;
+                }
+            }
+            return RedirectToAction(&quot;Index&quot;, &quot;Events&quot;);
+        }
+
+        [HttpGet]
+        [Route(&quot;Delete&quot;)]
+        public IActionResult Delete(string id)
+        {
+            var item = _eventService.Get(id);
+
+            return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route(&quot;Delete/id&quot;)]
+        public IActionResult DeleteConfirm([FromForm] string id)
+        {
+            if (id != null)
+            {
+                string wwwRootPath = _hostEnviroment.WebRootPath;
+
+                var ev = _eventService.Get(id);
+
+                if (ev.ImageName != null &amp;&amp; ev.ImageName != &quot;default&quot;)
+                {
+                    var oldImg = Path.Combine(wwwRootPath, &quot;Image&quot;, ev.ImageName);
+                    if (System.IO.File.Exists(oldImg))
+                    {
+                        System.IO.File.Delete(oldImg);
+                    }
+                }
+
+                _eventService.Remove(id);
+            }
+           
+            return RedirectToAction(&quot;Index&quot;, &quot;Events&quot;);
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[23,9,23,95,1],[24,9,24,10,1],[25,13,25,42,1],[26,13,26,46,1],[27,9,27,10,1],[32,9,32,10,0],[33,13,33,43,0],[35,13,35,59,0],[35,59,35,85,0],[35,85,35,94,0],[36,13,36,60,0],[37,13,37,33,0],[38,13,38,14,0],[39,17,39,70,0],[40,17,40,58,0],[41,13,41,14,0],[42,13,42,31,0],[43,9,43,10,0],[48,9,48,10,0],[49,13,49,27,0],[50,9,50,10,0],[56,9,56,10,0],[57,13,57,36,0],[58,13,58,14,0],[60,17,60,18,0],[61,21,61,48,0],[62,21,62,70,0],[63,21,63,41,0],[65,21,65,50,0],[66,21,66,22,0],[67,25,67,106,0],[68,25,68,89,0],[69,25,69,100,0],[70,25,70,87,0],[72,32,72,86,0],[73,25,73,26,0],[74,29,74,76,0],[75,25,75,26,0],[76,25,76,53,0],[77,21,77,22,0],[79,21,79,22,0],[80,25,80,44,0],[81,21,81,22,0],[86,21,86,54,0],[87,21,87,52,0],[88,21,88,66,0],[88,66,88,92,0],[88,92,88,101,0],[89,21,89,50,0],[90,21,90,22,0],[91,25,91,64,0],[92,25,92,38,0],[93,25,93,26,0],[94,29,94,67,0],[95,25,95,26,0],[96,25,96,38,0],[97,25,97,26,0],[98,29,98,68,0],[99,25,99,26,0],[100,25,100,38,0],[101,25,101,26,0],[102,29,102,70,0],[103,25,103,26,0],[104,25,104,39,0],[105,25,105,26,0],[106,29,106,69,0],[107,25,107,26,0],[108,25,108,38,0],[109,25,109,26,0],[110,29,110,67,0],[111,25,111,26,0],[112,25,112,44,0],[113,25,113,26,0],[114,29,114,55,0],[115,25,115,26,0],[117,25,117,26,0],[118,29,118,45,0],[119,25,119,26,0],[120,25,120,58,0],[121,25,121,54,0],[122,25,122,48,0],[123,25,123,41,0],[124,21,124,22,0],[126,21,126,22,0],[127,25,127,49,0],[128,25,128,48,0],[129,25,129,46,0],[130,25,130,44,0],[131,21,131,22,0],[133,21,133,47,0],[134,21,134,68,0],[135,17,135,18,0],[136,17,136,37,0],[137,17,137,18,0],[138,21,138,63,0],[139,17,139,18,0],[142,13,142,14,0],[144,13,144,56,0],[145,9,145,10,0],[150,9,150,10,1],[151,13,151,45,1],[152,13,152,50,1],[154,13,154,29,1],[155,13,155,14,1],[156,17,156,32,1],[157,17,157,46,1],[158,17,158,44,1],[159,17,159,36,1],[160,17,160,46,1],[161,17,161,42,1],[162,17,162,46,1],[163,17,163,45,1],[164,17,164,18,1],[165,21,165,41,1],[167,21,167,28,1],[167,30,167,35,1],[167,36,167,38,1],[167,39,167,47,1],[168,21,168,22,1],[169,25,169,62,1],[170,25,170,26,1],[171,29,171,41,1],[172,25,172,26,1],[173,30,173,68,1],[174,25,174,26,1],[175,29,175,41,1],[176,25,176,26,1],[177,30,177,70,1],[178,25,178,26,1],[179,29,179,41,1],[180,25,180,26,1],[181,30,181,69,0],[182,25,182,26,0],[183,29,183,42,0],[184,25,184,26,0],[185,30,185,67,0],[186,25,186,26,0],[187,29,187,41,0],[188,25,188,26,0],[189,21,189,22,1],[190,17,190,18,1],[192,13,192,14,1],[194,13,194,29,1],[195,9,195,10,1],[201,9,201,10,0],[202,13,202,36,0],[203,13,203,14,0],[205,17,205,18,0],[206,21,206,40,0],[207,21,207,22,0],[208,25,208,74,0],[209,25,209,63,0],[211,25,211,63,0],[213,25,213,79,0],[214,25,214,26,0],[215,29,215,91,0],[216,29,216,63,0],[217,29,217,30,0],[218,33,218,63,0],[219,29,219,30,0],[220,25,220,26,0],[222,25,222,54,0],[223,25,223,26,0],[224,29,224,110,0],[225,29,225,93,0],[226,29,226,104,0],[227,29,227,91,0],[229,36,229,90,0],[230,29,230,30,0],[231,33,231,80,0],[232,29,232,30,0],[233,29,233,56,0],[234,25,234,26,0],[236,25,236,26,0],[237,29,237,47,0],[238,25,238,26,0],[241,25,241,57,0],[242,25,242,55,0],[243,25,243,54,0],[244,25,244,26,0],[245,29,245,68,0],[246,29,246,50,0],[247,29,247,30,0],[248,33,248,71,0],[249,29,249,30,0],[250,29,250,42,0],[251,29,251,30,0],[252,33,252,72,0],[253,29,253,30,0],[254,29,254,42,0],[255,29,255,30,0],[256,33,256,74,0],[257,29,257,30,0],[258,29,258,43,0],[259,29,259,30,0],[260,33,260,73,0],[261,29,261,30,0],[262,29,262,42,0],[263,29,263,30,0],[264,33,264,71,0],[265,29,265,30,0],[266,29,266,48,0],[267,29,267,30,0],[268,33,268,58,0],[269,29,269,30,0],[271,29,271,30,0],[272,33,272,48,0],[273,29,273,30,0],[274,29,274,61,0],[275,29,275,57,0],[276,29,276,51,0],[277,29,277,44,0],[278,25,278,26,0],[280,25,280,26,0],[281,29,281,52,0],[282,29,282,51,0],[283,29,283,49,0],[284,29,284,47,0],[285,25,285,26,0],[286,25,286,61,0],[287,25,287,74,0],[288,21,288,22,0],[289,17,289,18,0],[290,17,290,37,0],[291,17,291,18,0],[292,21,292,63,0],[293,17,293,18,0],[294,13,294,14,0],[295,13,295,56,0],[296,9,296,10,0],[301,9,301,10,0],[302,13,302,46,0],[304,13,304,31,0],[305,9,305,10,0],[311,9,311,10,0],[312,13,312,28,0],[313,13,313,14,0],[314,17,314,66,0],[316,17,316,48,0],[318,17,318,71,0],[319,17,319,18,0],[320,21,320,83,0],[321,21,321,55,0],[322,21,322,22,0],[323,25,323,55,0],[324,21,324,22,0],[325,17,325,18,0],[327,17,327,42,0],[328,13,328,14,0],[330,13,330,56,0],[331,9,331,10,0]]);
+    </script>
+  </body>
+</html>

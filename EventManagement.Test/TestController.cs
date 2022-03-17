@@ -15,7 +15,7 @@ namespace EventManagement.Test
         public string DatabaseName = "Events";
         IDatabaseSettings settings;
         EventsController eventsController;
-        public string id = "";
+        public string id = "6192bbfe982af0dd0be02dca";
 
         [SetUp]
         public void Setup()

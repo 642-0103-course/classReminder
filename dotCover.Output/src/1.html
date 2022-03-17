@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>C:\Users\girid\OneDrive\Desktop\Desk\GDP\classReminder\EventManagement.Test\TestController.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Event_Management.Controllers;
+using Event_Management.Models;
+using Event_Management.MongodbContext;
+using Event_Management.Services;
+using NUnit.Framework;
+
+
+namespace EventManagement.Test
+{
+    [TestFixture]
+    public class TestController
+    {
+        public EventService ev;
+        public string ConnectionString = &quot;mongodb+srv://admin:admin@cluster0.6vdu6.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority&quot;;
+        public string DatabaseName = &quot;Events&quot;;
+        IDatabaseSettings settings;
+        EventsController eventsController;
+        public string id = &quot;6192bbfe982af0dd0be02dca&quot;;
+
+        [SetUp]
+        public void Setup()
+        {
+            settings = new DatabaseSettings();
+            settings.ConnectionString = ConnectionString;
+            settings.DatabaseName = DatabaseName;
+            ev = new EventService(settings);
+            eventsController = new EventsController(ev, null);
+        }
+
+
+
+        [Test]
+        public void TestGet()
+        {
+            var result = ev.Get();
+            if (result != null)
+            {
+                id = result[0].Id;
+                Assert.AreNotEqual(null, result);
+            }
+            else
+            {
+                Assert.AreEqual(null, result);
+            }
+            
+
+        }
+        [Test]
+        public void TestSearchList()
+        {
+            var x = ev.SearchList(&quot;giridhar196@gmail.com&quot;);
+            if (x == null)
+            {
+                Assert.AreNotEqual(null, ev.SearchList(id));
+            }
+            else
+            {
+                Assert.AreNotEqual(null, x);
+            }
+        }
+        [Test]
+        public void TestEditController()
+        {
+            var y = eventsController.Edit(id);
+            Assert.AreNotEqual(null, y);
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,9,14,141,1],[15,9,15,47,1],[18,9,18,55,1],[22,9,22,10,1],[23,13,23,47,1],[24,13,24,58,1],[25,13,25,50,1],[26,13,26,45,1],[27,13,27,63,1],[28,9,28,10,1],[34,9,34,10,1],[35,13,35,35,1],[36,13,36,32,1],[37,13,37,14,1],[38,17,38,35,1],[39,17,39,50,1],[40,13,40,14,1],[42,13,42,14,0],[43,17,43,47,0],[44,13,44,14,0],[47,9,47,10,1],[50,9,50,10,1],[51,13,51,60,1],[52,13,52,27,1],[53,13,53,14,0],[54,17,54,61,0],[55,13,55,14,0],[57,13,57,14,1],[58,17,58,45,1],[59,13,59,14,1],[60,9,60,10,1],[63,9,63,10,1],[64,13,64,47,1],[65,13,65,41,1],[66,9,66,10,1]]);
+    </script>
+  </body>
+</html>
