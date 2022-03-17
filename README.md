@@ -1,5 +1,7 @@
 # Class Remainder App
 
+[Test Coverage Link](https://giridhar196.github.io/classReminder/dotCover.Output.html)
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d1fc3ced2e114e4d8e3e433b86d1c5af)](https://www.codacy.com/gh/giridhar196/classReminder/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=giridhar196/classReminder&amp;utm_campaign=Badge_Grade)
 
 
@@ -43,6 +45,7 @@ Git hub Documentation Code [Link](https://github.com/giridhar196/ClassReminderDo
 - [Action Link](https://github.com/giridhar196/classReminder/actions/workflows/sonar.yml)
 - To test the coverage we need to run the command
 - dotnet dotcover test --dcReportType=HTML
+- [Test Coverage Link](https://giridhar196.github.io/classReminder/dotCover.Output.html)
 
 # Useful Links.
 
