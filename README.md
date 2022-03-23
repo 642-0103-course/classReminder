@@ -53,7 +53,7 @@ Git hub Documentation Code [Link](https://github.com/giridhar196/ClassReminderDo
 
 [Link to board](https://github.com/users/giridhar196/projects/4)
 
-[Link to all issues](https://github.com/giridhar196/classReminder/issues)
+[Link to all issues](https://github.com/users/giridhar196/projects/4)
 
 [Link to milestone](https://github.com/giridhar196/classReminder/milestones)
 
