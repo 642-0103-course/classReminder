@@ -151,11 +151,11 @@ namespace Event_Management.Controllers
                 ev.Id = evd.Id;
                 ev.EventName = evd.EventName;
                 ev.Location = evd.Location;
-                
+                ev.Notes = evd.Notes;
                 ev.StartDate = evd.StartDate;
                 ev.EndDate = evd.EndDate;
                 ev.ImageName = evd.ImageName;
-                if (evd.IsRecarsive == true)
+                if (evd.IsRecarsive)
                 {
                     ev.Recarsive = true;
 
@@ -237,13 +237,13 @@ namespace Event_Management.Controllers
                             ev.ImageName = "";
                         }
 
-
+                        ev.Notes = events.Notes;
                         ev.EventName = events.EventName;
                         ev.Location = events.Location;
-                        if (events.Recarsive == true)
+                        if (events.Recarsive)
                         {
                             List<string> list = new List<string>();
-                            if (events.M == true)
+                            if (events.M)
                             {
                                 list.Add(DayOfWeek.Monday.ToString());
                             }
