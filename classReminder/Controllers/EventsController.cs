@@ -14,7 +14,7 @@ namespace Event_Management.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class EventsController : Controller
     {
 
@@ -30,13 +30,10 @@ namespace Event_Management.Controllers
         [Route("Index")]
         public IActionResult Index()
         {
-            var name = User.Identity.Name;
-            //var x = ClaimsPrincipal.Current.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
             var emailId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             List<EventModel> list = new List<EventModel>();
             if (emailId != null)
             {
-                var userId = HttpContext.Session.GetString("UserId");
                 list = _eventService.SearchList(emailId);
             }
             return View(list);
@@ -79,14 +76,11 @@ namespace Event_Management.Controllers
                     {
                         obj.ImageName = "";
                     }
-
-
-
-
                     obj.EventName = events.EventName;
                     obj.Location = events.Location;
                     obj.UserID = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-                    if (events.Recarsive == true)
+                    obj.Notes = events.Notes;
+                    if (events.Recarsive)
                     {
                         List<string> list = new List<string>();
                         if (events.M)
@@ -128,6 +122,7 @@ namespace Event_Management.Controllers
                         obj.Date = events.Date;
                         obj.StartDate = null;
                         obj.EndDate = null;
+                        obj.Time = events.Time;
                     }
 
                     _eventService.Create(obj);
@@ -156,7 +151,7 @@ namespace Event_Management.Controllers
                 ev.Id = evd.Id;
                 ev.EventName = evd.EventName;
                 ev.Location = evd.Location;
-                ev.Date = evd.Date;
+                
                 ev.StartDate = evd.StartDate;
                 ev.EndDate = evd.EndDate;
                 ev.ImageName = evd.ImageName;
@@ -187,6 +182,11 @@ namespace Event_Management.Controllers
                             ev.F = true;
                         }
                     }
+                }
+                else
+                {
+                    ev.Date = evd.Date;
+                    ev.Time = evd.Time;
                 }
 
             }
@@ -281,6 +281,7 @@ namespace Event_Management.Controllers
                             ev.IsRecarsive = false;
                             ev.Date = events.Date;
                             ev.StartDate = null;
+                            ev.Time = events.Time;
                             ev.EndDate = null;
                         }
                         _eventService.Update(events.Id, ev);
@@ -298,6 +299,15 @@ namespace Event_Management.Controllers
         [HttpGet]
         [Route("Delete")]
         public IActionResult Delete(string id)
+        {
+            var item = _eventService.Get(id);
+
+            return View(item);
+        }
+
+        [HttpGet]
+        [Route("View")]
+        public IActionResult View(string id)
         {
             var item = _eventService.Get(id);
 
@@ -326,7 +336,7 @@ namespace Event_Management.Controllers
 
                 _eventService.Remove(id);
             }
-           
+
             return RedirectToAction("Index", "Events");
         }
 

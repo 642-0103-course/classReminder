@@ -25,13 +25,24 @@ namespace Event_Management.Controllers
         public IActionResult Index()
         {
 
-            List<EventModel> list = new List<EventModel>();
+            List<EventModel> output = new List<EventModel>();
             var emailId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             if (emailId != null)
             {
-                list = _eventService.SearchList(emailId);
+                List<EventModel> list = _eventService.SearchList(emailId);
+                foreach (EventModel eventModel in list)
+                {
+                    if (eventModel.Date!=null)
+                    {
+                        if (DateTime.Parse(eventModel.Date).ToShortDateString() == DateTime.Now.Date.ToShortDateString())
+                        {
+                            output.Add(eventModel);
+                        }
+                    }
+
+                }
             }
-            return View(list);
+            return View(output);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -54,7 +54,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item bg-primary">Location: <span>@Model.FirstOrDefault().Location</span></li>
-                    <li class="list-group-item bg-primary">Date: <span> @Model.FirstOrDefault().Date.</span></li>
+                    <li class="list-group-item bg-primary">Date: <span> @DateTime.Parse(Model.FirstOrDefault().Date).ToShortDateString().</span></li>
+                    <li class="list-group-item bg-primary">Time: <span> @DateTime.Parse(Model.FirstOrDefault().Time).ToShortTimeString().</span></li>
                 </ul>
                 <div class="card-body">
                     <a href="/api/Events/Index" class="card-link">See more</a>

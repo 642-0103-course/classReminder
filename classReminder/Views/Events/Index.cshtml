@@ -29,7 +29,9 @@
                         <th class="col-md-2">
                             @Html.DisplayNameFor(model => model.Date)
                         </th>
-                       
+                        <th class="col-md-2">
+                            @Html.DisplayNameFor(model => model.Time)
+                        </th>
                         <th class="col-md-2"> Action</th>
                     </tr>
                 </thead>
@@ -38,31 +40,35 @@
                     {
                         @foreach (var item in Model)
                         {
-                            <tr class="col-md-12">
-                                <td class="col-md-2">
-                                    @Html.DisplayFor(modelItem => item.EventName)
-                                </td>
-                                <td class="col-md-2">
-                                    @Html.DisplayFor(modelItem => item.Location)
-                                </td>
-                                <td class="col-md-2">
-                                    @if (item.Date != null)
-                                    {@item.Date.Value.ToString("d")}
+                    <tr class="col-md-12">
+                        <td class="col-md-2">
+                            @Html.DisplayFor(modelItem => item.EventName)
+                        </td>
+                        <td class="col-md-2">
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td class="col-md-2">
+                            @if (item.Date != null)
+                            {@DateTime.Parse(item.Date).ToShortDateString()}
+                        </td>
+                        <td class="col-md-2">
+                            @if (item.Date != null)
+                            {@DateTime.Parse(item.Time).ToShortTimeString()}
+                        </td>
+                        <td class="col-md-2">
+                            <a href="View?id=@item.Id" class="text-warning">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                            <a href="Edit?id=@item.Id">
+                                <i class='fa fa-edit'></i>
+                            </a>
+                            <a href="Delete?id=@item.Id" class="text-danger">
+                                <i class='fa fa-trash'></i>
+                            </a>
 
-                                </td>
-                               
-                                <td class="col-md-2">
-                                    <a href="Edit?id=@item.Id">
-                                        <i class='fa fa-edit'></i>
-                                    </a>
-                                    <a href="Delete?id=@item.Id" class="text-danger">
-                                        <i class='fa fa-trash'></i>
-                                    </a>
-
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
                         }
-
                     }
                 </tbody>
             </table>

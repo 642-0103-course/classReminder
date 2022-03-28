@@ -1,0 +1,53 @@
+﻿@model Event_Management.Models.EventModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>View Event</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2" style="display:none">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10" style="display:none">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2" style="display:none">
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+        <dd class="col-sm-10" style="display:none">
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt class="col-sm-2">
+            Image
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.ImageName != "")
+            {
+                <img src=@("~/Image/"+Model.ImageName) id="prv" alt="image" asp-append-version="true" width="200px" height="200px" />
+            }
+            else
+            {
+                <img class="card-img-top" src="Image/default.jpg" alt="default img">
+            }
+        </dd>
+    </dl>
+
+</div>
